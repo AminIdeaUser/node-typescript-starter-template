@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const paginate = schema => {
   schema.statics.paginate = async function (filters, options, geoFilters = null) {
@@ -204,4 +204,4 @@ const paginate = schema => {
   };
 };
 
-module.exports = { paginate };
+export default paginate;

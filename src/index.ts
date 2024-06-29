@@ -6,7 +6,7 @@ import app from './app';
 (async () => {
   await MongoDB.connect();
   const server = app.listen(config.port, () =>
-    console.log(`Listening to requests on port ${config.port}`)
+    logger.info(`Listening to requests on port ${config.port}`)
   );
 
   process.on('unhandledRejection', err => {

@@ -112,4 +112,4 @@ async function s3Upload(
   );
 }
 
-export default { s3Upload, s3Delete, s3Move, getObjectURL, multerUpload };
+export { s3Upload, s3Delete, s3Move, getObjectURL, multerUpload };

@@ -1,1 +1,1 @@
-export { default as fileUploadService } from './fileUpload.service';
+export * as fileUploadService from './fileUpload.service';
