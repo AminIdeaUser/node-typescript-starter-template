@@ -1,5 +1,6 @@
 import MongoDB from './config/mongodb.config';
 import config from './config/env.config';
+import logger from './config/winston.config';
 import app from './app';
 
 (async () => {
@@ -9,9 +10,9 @@ import app from './app';
   );
 
   process.on('unhandledRejection', err => {
-    console.log(err);
+    logger.error(err);
     server.close(() => {
-      console.log('Shutting down the server! 💥💥💥');
+      logger.info('Shutting down the server! 💥💥💥');
       process.exit(1);
     });
   });

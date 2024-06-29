@@ -5,10 +5,19 @@ import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
 import httpStatus from 'http-status';
 
+import morgan from './config/morgan.config';
 import baseRouter from './routes/v1';
 import ApiError from './utils/apiError';
+import config from './config/env.config';
 
 const app = express();
+
+// Morgan will handle logging HTTP requests
+// Winston logger will take care of your application-specific logs
+if (config.env !== 'test') {
+  app.use(morgan.successHandler);
+  app.use(morgan.errorHandler);
+}
 
 // Set security HTTP headers
 app.use(helmet());
