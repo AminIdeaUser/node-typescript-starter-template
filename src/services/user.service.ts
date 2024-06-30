@@ -1,3 +1,5 @@
-const updateMe = () => {};
+import { User } from '../models';
 
-export { updateMe };
+const getUserByFirebaseUId = (uid: string) => User.findOne({ firebaseUid: uid });
+
+export { getUserByFirebaseUId };

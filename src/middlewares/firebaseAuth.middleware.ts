@@ -3,7 +3,7 @@ import admin, { FirebaseError } from 'firebase-admin';
 import httpStatus from 'http-status';
 
 import config from '../config/env.config';
-import { authService } from '../services';
+import { userService } from '../services';
 import { catchAsync } from '../utils/helpers';
 import ApiError from '../utils/apiError';
 import { IStandardUser } from '../models';
@@ -23,7 +23,7 @@ const firebaseAuth = (...allowedUserRoles: Array<UserRole | 'All'>) =>
 
     try {
       const payload = await admin.auth().verifyIdToken(token, true);
-      const user = await authService.getUserByFirebaseUId(payload.uid);
+      const user = await userService.getUserByFirebaseUId(payload.uid);
 
       // User is not available in mongodb
       if (!user) {
