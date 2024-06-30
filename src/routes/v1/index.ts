@@ -5,8 +5,9 @@ import authRouter from './auth.routes';
 
 const router = express.Router();
 
-router.use('/auth', authRouter);
-router.use('/users', userRouter);
+router
+  .use('/auth', authRouter)
+  .use('/users', userRouter);
 
 router.get('/health', (req: Request, res: Response<JSend>) =>
   res.json({
