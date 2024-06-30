@@ -1,5 +1,12 @@
 import { z } from 'zod';
 
+const paginateOptionsSchema = z.object({
+  limit: z.coerce.number().default(10),
+  page: z.coerce.number().default(1),
+  sortBy: z.string().trim().default('createdAt'),
+  sortOrder: z.enum(['', 'asc']).default(''),
+});
+
 const fileSchema = (
   fieldName: string,
   allowedTypes: Array<string>,
@@ -16,4 +23,4 @@ const fileSchema = (
     size: z.number().int().positive(),
   });
 
-export { fileSchema };
+export { paginateOptionsSchema, fileSchema };

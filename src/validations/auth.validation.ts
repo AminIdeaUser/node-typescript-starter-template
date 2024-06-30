@@ -12,7 +12,7 @@ const generateToken = z.object({
 const registerUser = z.object({
   file: fileSchema('photo', imageTypes, Object.values(imgTypeToExtension)),
   body: z.strictObject({
-    fullName: z.string(),
+    fullName: z.string().trim(),
   }),
 });
 
