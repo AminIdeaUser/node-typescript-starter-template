@@ -5,7 +5,7 @@ import paginate from '../lib/paginate';
 // /////////////////////////////// Base User Schema ///////////////////////////////
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    fullName: {
       type: String,
       trim: true,
       required: true,
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    profilePic: {
+    photo: {
       type: {
         key: {
           type: String,

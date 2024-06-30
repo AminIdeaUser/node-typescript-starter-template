@@ -6,9 +6,14 @@ import config from '../config/env.config';
 import { catchAsync } from '../utils/helpers';
 import ApiError from '../utils/apiError';
 import { authValidation } from '../validations';
+import { userService } from '../services';
+import { fileUploadService } from '../microservices';
 
 const generateToken = catchAsync(
-  async (req: Request<object, object, authValidation.IGenerateToken['body']>, res: Response) => {
+  async (
+    req: Request<object, object, authValidation.IGenerateToken['body']>,
+    res: Response<JSend>
+  ) => {
     if (config.env !== 'development')
       throw new ApiError('Could not find the route you are looking for', httpStatus.NOT_FOUND);
 
@@ -25,12 +30,31 @@ const generateToken = catchAsync(
     const { idToken } = await response.json();
 
     res.json({
-      data: {
-        status: true,
-        token: idToken,
-      },
+      status: 'success',
+      data: idToken,
     });
   }
 );
 
-export { generateToken };
+const registerUser = catchAsync(
+  async (req: Request<object, object, authValidation.IRegisterUser['body']>, res: Response) => {
+    if (req.user)
+      return res.status(httpStatus.UNAUTHORIZED).json({ message: 'User already exists' });
+
+    const { userPayload: payload } = res.locals;
+
+    const [photo] = await fileUploadService.s3Upload([req.file!], 'users');
+
+    const user = await userService.createUser({
+      ...req.body,
+      photo,
+      email: payload.email,
+      firebaseUid: payload.uid,
+      firebaseSignInProvider: payload.firebase.sign_in_provider,
+    });
+
+    res.status(httpStatus.CREATED).json({ data: user });
+  }
+);
+
+export { generateToken, registerUser };

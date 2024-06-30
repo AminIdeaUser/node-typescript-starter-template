@@ -27,10 +27,10 @@ const firebaseAuth = (...allowedUserRoles: Array<UserRole | 'All'>) =>
 
       // User is not available in mongodb
       if (!user) {
-        if (!req.path.includes('register') && !req.path.includes('admin-secretSignup'))
-          throw new ApiError("User doesn't exist. Please create account", httpStatus.NOT_FOUND);
+        if (!req.path.includes('register'))
+          throw new ApiError("User doesn't exist. Please create an account", httpStatus.NOT_FOUND);
 
-        res.locals.newUser = payload;
+        res.locals.userPayload = payload;
         return next();
       }
 
