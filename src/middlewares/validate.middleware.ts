@@ -19,7 +19,7 @@ const validateSchema =
       'files',
     ];
 
-    const objectToValidate: { [key: string]: any } = { params: {} };
+    const objectToValidate: { [key: string]: unknown } = { params: {} };
 
     validationFields.forEach(field => {
       objectToValidate[field] = req[field];

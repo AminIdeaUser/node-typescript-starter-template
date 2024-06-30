@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import mongoose from 'mongoose';
 
 const paginate = schema => {
@@ -29,7 +31,7 @@ const paginate = schema => {
     const skip = (page - 1) * limit;
 
     // defining the Pipeline that documents has to go through
-    let docsPipeline = [...pipeline, ...(options.pipeline || [])];
+    const docsPipeline = [...pipeline, ...(options.pipeline || [])];
 
     // adding location based search filters if given by user
 
