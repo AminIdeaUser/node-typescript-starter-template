@@ -37,9 +37,14 @@ const generateToken = catchAsync(
 );
 
 const registerUser = catchAsync(
-  async (req: Request<object, object, authValidation.IRegisterUser['body']>, res: Response) => {
+  async (
+    req: Request<object, object, authValidation.IRegisterUser['body']>,
+    res: Response<JSend>
+  ) => {
     if (req.user)
-      return res.status(httpStatus.UNAUTHORIZED).json({ message: 'User already exists' });
+      return res
+        .status(httpStatus.UNAUTHORIZED)
+        .json({ status: 'fail', message: 'User already exists' });
 
     const { userPayload: payload } = res.locals;
 
@@ -53,7 +58,7 @@ const registerUser = catchAsync(
       firebaseSignInProvider: payload.firebase.sign_in_provider,
     });
 
-    res.status(httpStatus.CREATED).json({ data: user });
+    res.status(httpStatus.CREATED).json({ status: 'success', data: user });
   }
 );
 

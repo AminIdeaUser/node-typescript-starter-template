@@ -4,4 +4,7 @@ const getUserByFirebaseUId = (uid: string) => User.findOne({ firebaseUid: uid })
 
 const createUser = (data: Partial<IUser>) => User.create(data);
 
-export { getUserByFirebaseUId, createUser };
+const updateUserById = (id: MongoObjectId, data: Partial<IUser>) =>
+  User.findByIdAndUpdate(id, data, { new: true, runValidators: true });
+
+export { getUserByFirebaseUId, createUser, updateUserById };

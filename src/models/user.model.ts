@@ -69,8 +69,11 @@ const standardUserSchema = new mongoose.Schema({
 const adminSchema = new mongoose.Schema({});
 
 // /////////////////////////////// Infer types from schemas ///////////////////////////////
-type IUser = mongoose.Document & InferSchemaType<typeof userSchema> & { __t: UserRole };
+type IUser = mongoose.Document &
+  InferSchemaType<typeof userSchema> & { __t: UserRole; _id: MongoObjectId };
+
 type IStandardUser = IUser & InferSchemaType<typeof standardUserSchema>;
+
 type IAdmin = IUser & InferSchemaType<typeof adminSchema>;
 
 // /////////////////////////////// Models & Discriminators ///////////////////////////////

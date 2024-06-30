@@ -4,14 +4,14 @@ import { fileSchema } from './custom.validation';
 import { imageTypes, imgTypeToExtension } from '../constants';
 
 const generateToken = z.object({
-  body: z.object({
+  body: z.strictObject({
     uid: z.string(),
   }),
 });
 
 const registerUser = z.object({
   file: fileSchema('photo', imageTypes, Object.values(imgTypeToExtension)),
-  body: z.object({
+  body: z.strictObject({
     fullName: z.string(),
   }),
 });
