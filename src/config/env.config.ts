@@ -49,18 +49,10 @@ const config = {
     url: envVars.MONGODB_URL,
   },
   firebase: {
-    type: envVars.FIREBASE_TYPE,
     projectId: envVars.FIREBASE_PROJECT_ID,
     apiKey: envVars.FIREBASE_API_KEY,
-    private_key_id: envVars.FIREBASE_PRIVATE_KEY_ID,
     privateKey: envVars.FIREBASE_PRIVATE_KEY,
     clientEmail: envVars.FIREBASE_CLIENT_EMAIL,
-    client_id: envVars.FIREBASE_CLIENT_ID,
-    auth_uri: envVars.FIREBASE_AUTH_URI,
-    token_uri: envVars.FIREBASE_TOKEN_URI,
-    auth_provider_x509_cert_url: envVars.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
-    client_x509_cert_url: envVars.FIREBASE_CLIENT_X509_CERT_URL,
-    universe_domain: envVars.FIREBASE_UNIVERSE_DOMAIN,
   },
 };
 
