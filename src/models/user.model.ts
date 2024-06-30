@@ -74,6 +74,7 @@ type IStandardUser = IUser & InferSchemaType<typeof standardUserSchema>;
 type IAdmin = IUser & InferSchemaType<typeof adminSchema>;
 
 // /////////////////////////////// Models & Discriminators ///////////////////////////////
+// /////////////////////////////// ✏️ Update UserRole in types.d.ts if you add more discriminators ///////////////////////////////
 const User = mongoose.model<IUser>('User', userSchema);
 const StandardUser = User.discriminator<IStandardUser>('StandardUser', standardUserSchema);
 const Admin = User.discriminator<IAdmin>('Admin', adminSchema);

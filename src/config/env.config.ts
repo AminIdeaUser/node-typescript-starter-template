@@ -20,6 +20,8 @@ const envVarsSchema = z.object({
   FIREBASE_API_KEY: z.string(),
   FIREBASE_PRIVATE_KEY: z.string(),
   FIREBASE_CLIENT_EMAIL: z.string(),
+
+  // ✏️ Add more environment variables here (Add the same in the config object below)
 });
 
 // Validate the process.env object that contains all the env variables
