@@ -10,10 +10,24 @@ const envVarsSchema = z.object({
   NODE_ENV: z.enum(['test', 'development', 'production']),
   PORT: z.coerce.number().default(8082),
   MONGODB_URL: z.string(),
+
   AWS_S3_SECRET_ACCESS_KEY: z.string(),
   AWS_S3_REGION: z.string(),
   AWS_S3_ACCESS_KEY_ID: z.string(),
   AWS_S3_BUCKET: z.string(),
+
+  FIREBASE_TYPE: z.string(),
+  FIREBASE_PROJECT_ID: z.string(),
+  FIREBASE_API_KEY: z.string(),
+  FIREBASE_PRIVATE_KEY_ID: z.string(),
+  FIREBASE_PRIVATE_KEY: z.string(),
+  FIREBASE_CLIENT_EMAIL: z.string(),
+  FIREBASE_CLIENT_ID: z.string(),
+  FIREBASE_AUTH_URI: z.string(),
+  FIREBASE_TOKEN_URI: z.string(),
+  FIREBASE_AUTH_PROVIDER_X509_CERT_URL: z.string(),
+  FIREBASE_CLIENT_X509_CERT_URL: z.string(),
+  FIREBASE_UNIVERSE_DOMAIN: z.string(),
 });
 
 // Validate the process.env object that contains all the env variables
@@ -33,6 +47,20 @@ const config = {
   },
   mongoose: {
     url: envVars.MONGODB_URL,
+  },
+  firebase: {
+    type: envVars.FIREBASE_TYPE,
+    projectId: envVars.FIREBASE_PROJECT_ID,
+    apiKey: envVars.FIREBASE_API_KEY,
+    private_key_id: envVars.FIREBASE_PRIVATE_KEY_ID,
+    privateKey: envVars.FIREBASE_PRIVATE_KEY,
+    clientEmail: envVars.FIREBASE_CLIENT_EMAIL,
+    client_id: envVars.FIREBASE_CLIENT_ID,
+    auth_uri: envVars.FIREBASE_AUTH_URI,
+    token_uri: envVars.FIREBASE_TOKEN_URI,
+    auth_provider_x509_cert_url: envVars.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
+    client_x509_cert_url: envVars.FIREBASE_CLIENT_X509_CERT_URL,
+    universe_domain: envVars.FIREBASE_UNIVERSE_DOMAIN,
   },
 };
 
