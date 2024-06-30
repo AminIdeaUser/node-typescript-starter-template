@@ -13,4 +13,11 @@ router.patch(
   userController.updateMe
 );
 
+router.patch(
+  '/me/preferences',
+  firebaseAuth('StandardUser'),
+  validate(userValidation.updateMyPreferences),
+  userController.updateMyPreferences
+);
+
 export default router;

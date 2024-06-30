@@ -50,7 +50,7 @@ const registerUser = catchAsync(
 
     const [photo] = await fileUploadService.s3Upload([req.file!], 'users');
 
-    const user = await userService.createUser({
+    const user = await userService.createStandardUser({
       ...req.body,
       photo,
       email: payload.email,

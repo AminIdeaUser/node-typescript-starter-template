@@ -55,11 +55,11 @@ const standardUserSchema = new mongoose.Schema({
   },
   preferences: {
     type: {
-      notificationEnabled: Boolean,
+      notificationsEnabled: Boolean,
       locationShared: Boolean,
     },
     default: {
-      notificationEnabled: false,
+      notificationsEnabled: false,
       locationShared: false,
     },
   },
@@ -76,10 +76,12 @@ type IStandardUser = IUser & InferSchemaType<typeof standardUserSchema>;
 
 type IAdmin = IUser & InferSchemaType<typeof adminSchema>;
 
+type IAnyUser = IUser | IStandardUser | IAdmin;
+
 // /////////////////////////////// Models & Discriminators ///////////////////////////////
 // /////////////////////////////// ✏️ Update UserRole in types.d.ts if you add more discriminators ///////////////////////////////
 const User = mongoose.model<IUser>('User', userSchema);
 const StandardUser = User.discriminator<IStandardUser>('StandardUser', standardUserSchema);
 const Admin = User.discriminator<IAdmin>('Admin', adminSchema);
 
-export { User, StandardUser, Admin, IUser, IStandardUser, IAdmin };
+export { User, StandardUser, Admin, IUser, IStandardUser, IAdmin, IAnyUser };

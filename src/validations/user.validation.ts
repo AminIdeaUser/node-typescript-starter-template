@@ -7,7 +7,15 @@ const updateMe = z.object({
   }),
 });
 
-type IUpdateMe = z.infer<typeof updateMe>;
+const updateMyPreferences = z.object({
+  body: z.strictObject({
+    notificationsEnabled: z.coerce.boolean().optional(),
+    locationShared: z.coerce.boolean().optional(),
+  }),
+});
 
-export { updateMe };
-export type { IUpdateMe };
+type IUpdateMe = z.infer<typeof updateMe>;
+type IUpdateMyPreferences = z.infer<typeof updateMyPreferences>;
+
+export { updateMe, updateMyPreferences };
+export type { IUpdateMe, IUpdateMyPreferences };
