@@ -1,4 +1,4 @@
-import mongoose, { InferSchemaType } from 'mongoose';
+import mongoose, { InferSchemaType, Document } from 'mongoose';
 
 import paginate from '../lib/paginate';
 
@@ -69,12 +69,12 @@ const standardUserSchema = new mongoose.Schema({
 const adminSchema = new mongoose.Schema({});
 
 // /////////////////////////////// Infer types from schemas ///////////////////////////////
-type IUser = InferSchemaType<typeof userSchema>;
+type IUser = Document & InferSchemaType<typeof userSchema> & { __t: UserRole };
 type IStandardUser = IUser & InferSchemaType<typeof standardUserSchema>;
 type IAdmin = IUser & InferSchemaType<typeof adminSchema>;
 
 // /////////////////////////////// Models & Discriminators ///////////////////////////////
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model<IUser>('User', userSchema);
 const StandardUser = User.discriminator<IStandardUser>('StandardUser', standardUserSchema);
 const Admin = User.discriminator<IAdmin>('Admin', adminSchema);
 

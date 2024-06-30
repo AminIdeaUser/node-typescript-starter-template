@@ -6,6 +6,7 @@ import config from '../config/env.config';
 import { authService } from '../services';
 import { catchAsync } from '../utils/helpers';
 import ApiError from '../utils/apiError';
+import { IStandardUser } from '../models';
 
 admin.initializeApp({
   credential: admin.credential.cert({
@@ -37,9 +38,11 @@ const firebaseAuth = (...allowedUserRoles: Array<UserRole | 'All'>) =>
       if (!allowedUserRoles.includes(user.__t) && allowedUserRoles[0] !== 'All')
         throw new ApiError("Sorry, but you can't access this", httpStatus.FORBIDDEN);
 
-      if (user.isBlocked) throw new ApiError('User is blocked', httpStatus.FORBIDDEN);
+      if ((user as IStandardUser).isBlocked)
+        throw new ApiError('User is blocked', httpStatus.FORBIDDEN);
 
-      if (user.isDeleted) throw new ApiError("User doesn't exist anymore", httpStatus.GONE);
+      if ((user as IStandardUser).isDeleted)
+        throw new ApiError("User doesn't exist anymore", httpStatus.GONE);
 
       req.user = user;
       next();
