@@ -5,6 +5,10 @@ import { userService } from '../services';
 import { userValidation } from '../validations';
 import { IStandardUser } from '../models';
 
+const getMe = (req: Request, res: Response<JSend>) => {
+  res.json({ status: 'success', data: req.user });
+};
+
 const updateMe = catchAsync(
   async (req: Request<object, object, userValidation.IUpdateMe['body']>, res: Response<JSend>) => {
     const updatedUser = await userService.updateUserById(req.user._id, req.body);
@@ -31,4 +35,4 @@ const updateMyPreferences = catchAsync(
   }
 );
 
-export { updateMe, updateMyPreferences };
+export { getMe, updateMe, updateMyPreferences };

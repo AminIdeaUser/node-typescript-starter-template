@@ -6,6 +6,8 @@ import { userController } from '../../controllers';
 
 const router = express.Router();
 
+router.get('/me', firebaseAuth('All'), userController.getMe);
+
 router.patch(
   '/me',
   firebaseAuth('All'),
